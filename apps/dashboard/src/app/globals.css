@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+/*
+ * Field Lab tokens (UI refinement plan §2): a warm light workbench with one cobalt signal colour,
+ * deliberately unlike the portfolio's near-black/coral palette. Colours encode state, never decoration.
+ * Every text token meets WCAG AA (4.5:1) on canvas, surface, subtle and accent-soft; `control`
+ * (input and button borders) meets 3:1.
+ */
+@theme {
+  --color-canvas: #f5f3ee;
+  --color-surface: #ffffff;
+  --color-subtle: #ece9e2;
+  --color-line: #dcd8ce;
+  --color-control: #837e74;
+  --color-fg: #1a1916;
+  --color-secondary: #4f4b43;
+  --color-muted: #68635a;
+  --color-accent: #2643d0;
+  --color-accent-soft: #e8ecfb;
+  --color-on-accent: #ffffff;
+  --color-success: #1d7444;
+  --color-warning: #8a5700;
+  --color-failure: #be2d26;
+  --color-neutral: #4a5466;
+
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-code), ui-monospace, monospace;
+
+  --radius-ui: 6px;
+
+  --animate-row-in: row-in 140ms ease-out;
+  --animate-drawer-in: drawer-in 160ms ease-out;
+  --animate-fade-in: fade-in 120ms ease-out;
+}
+
+@keyframes row-in {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes drawer-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes pending-pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+/* Only on in-flight elements; never on the whole timeline. */
+.animate-pending {
+  animation: pending-pulse 1.2s ease-in-out infinite;
+}
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-fg);
+  font-size: 14px;
+  /* Latency, durations, counts and timestamps must line up. */
+  font-variant-numeric: tabular-nums;
+}
+
+/* Focus: outline plus offset. In the base layer so a component can supply its own indicator. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+::selection {
+  background: var(--color-accent-soft);
+}
+
+/* Simulated delay is hatched so it never reads as measured time. */
+.hatch {
+  background-image: repeating-linear-gradient(-45deg, currentColor 0 2px, transparent 2px 5px);
+  opacity: 0.6;
+}
+
+dialog::backdrop {
+  background: rgb(26 25 22 / 0.28);
+}
+
+input[type="range"] {
+  accent-color: var(--color-accent);
+}
+
+/* A native checkbox drawn as a switch: keeps keyboard, form and test semantics. Always paired with On/Off text. */
+.switch {
+  appearance: none;
+  flex-shrink: 0;
+  width: 32px;
+  height: 18px;
+  border: 1px solid var(--color-control);
+  border-radius: 9px;
+  background-color: var(--color-surface);
+  background-image: radial-gradient(circle, var(--color-muted) 5px, transparent 5.5px);
+  background-repeat: no-repeat;
+  background-position: 1px center;
+  background-size: 14px 14px;
+  cursor: pointer;
+  transition:
+    background-position 140ms ease-out,
+    background-color 140ms ease-out;
+}
+
+.switch:checked {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent);
+  background-image: radial-gradient(circle, var(--color-on-accent) 5px, transparent 5.5px);
+  background-position: calc(100% - 1px) center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

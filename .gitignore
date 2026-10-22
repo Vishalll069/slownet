@@ -1,0 +1,15 @@
+node_modules/
+.next/
+dist/
+coverage/
+out/
+*.tsbuildinfo
+.env*
+!.env.example
+test-results/
+playwright-report/
+.DS_Store
+apps/dashboard/public/slownet-live.js
+
+# Spec documents stay local (summarised in PROJECT_LOG.md).
+docs/*.docx

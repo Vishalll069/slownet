@@ -1,0 +1,19 @@
+{
+  "name": "slownet",
+  "private": true,
+  "description": "Reproducible, seeded network-failure scenarios for frontend apps and tests.",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @slownet/dashboard",
+    "build": "npm run build -w @slownet/core && npm run build -w @slownet/dashboard",
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=20.9"
+  }
+}

@@ -1,0 +1,24 @@
+# Known limitations
+
+- **Only the bundled demo, or apps you connect, are affected.** SlowNet never intercepts other tabs, sites or the OS. A connected app is shaped only because it loads the SlowNet script.
+- **It is a simulation, not a measurement.** Delays are added in JavaScript before the request is sent. Radio conditions, DNS, TLS handshakes, packet loss, bandwidth limits and slow body streaming are not modelled.
+- **The timeout covers the delay and the response headers**, not reading the body.
+- **Jitter is uniform** in `[-jitter, +jitter]`, clamped at 0 ms. Real latency distributions have long tails.
+- **Seeds reproduce the sequence of attempts**, not wall-clock timing. The real fetch time to the local API still varies by a few milliseconds.
+- **"Real fetch (approx.)"** in the inspector is wall-clock duration minus simulated delay, so it includes timer scheduling overhead.
+- The median duration is shown only once there are at least 3 settled attempts.
+- **Export confirmation is "download started", not "saved".** A download link gives the page no signal that the file was written, so the UI never claims more than that.
+- **Reproduction steps replay the run's requests in order.** A seeded sequence depends on how many attempts ran since the last Clear run or seed change, so steps list every earlier request in the run.
+- **Fonts come from Google Fonts** via `next/font`. Offline or behind a proxy, the build falls back to system fonts.
+- **Response previews are kept in memory** for the current run only and are not part of the exported report.
+- **Long runs are not virtualised.** Hundreds of requests render as plain rows. That works for demo-sized runs; virtualisation would be needed beyond that.
+- **Focus recorder keeps the setup bar.** It hides the endpoints and advanced conditions but keeps profile selection and Run scenario, since running needs them.
+- **Execution time includes timer overhead.** It is measured as duration minus applied delay, so a dropped attempt can show 1–2 ms of execution.
+- **The pinned-inspector preference is stored in localStorage.** When storage is blocked it lasts for the page view only.
+- **Live sessions shape `fetch` only.** `XMLHttpRequest`, and so axios's default browser adapter, WebSockets and resource loads (images, scripts) pass through untouched.
+- **Live timings use the connected app's clock.** Apps on different machines with skewed clocks will appear offset from each other in one run.
+- **The relay is eventually consistent.** Profile changes reach connected apps in about 1 s (SSE polling the store), and events appear on the dashboard within about 0.5 s.
+- **Session ids are capabilities.** Anyone holding one can report events into the session and watch it. The control key is required to change it. There's no account system.
+- **Chrome blocks public `http://` pages from reaching a local SlowNet** (Private Network Access). Connect from an app on localhost, or deploy SlowNet to an HTTPS host.
+- **Live clears can't be undone,** unlike demo clears, because the run lives on the relay.
+- **The Upstash store is tested against a mocked REST API** in unit tests; the in-memory store is exercised end to end.
