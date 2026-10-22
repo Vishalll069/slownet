@@ -13,3 +13,4 @@ apps/dashboard/public/slownet-live.js
 
 # Spec documents stay local (summarised in PROJECT_LOG.md).
 docs/*.docx
+.vercel

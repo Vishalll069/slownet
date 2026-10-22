@@ -69,7 +69,7 @@ Typecheck, lint, unit and E2E tests pass; no secrets; README has setup, commands
 | --- | --- | --- |
 | Done | Field Instrument UI (UI spec phases 1–5) | ✅ Done, then refined |
 | Done | Field Lab refinement (plan phases 1–4, 6) | ✅ Done |
-| Done | Live sessions: shape your own app via a script tag, realtime relay (Vercel-ready) | ✅ Done; production deploy pending your Vercel + Upstash setup |
+| Done | Live sessions: shape your own app via a script tag, realtime relay (Vercel-ready) | ✅ Done; deployed, waiting on Upstash Redis for live mode |
 | Next | Publish `@slownet/core` to npm (ESM import instead of the script tag) | Planned |
 | Next | Shape XMLHttpRequest (axios default adapter) in live sessions | Planned |
 | Next | Plan phase 5: scenario presets (Timeout boundary, Retry behavior…) | Planned |
@@ -140,6 +140,12 @@ Typecheck, lint, unit and E2E tests pass; no secrets; README has setup, commands
 ---
 
 ## 3. Changelog
+
+### 2026-10-22: Deployed to Vercel
+- Production: https://slownet-seven.vercel.app (project `slownet` under vishalll069's Vercel account). `slownet.vercel.app` belongs to someone else.
+- Project settings: Root Directory `apps/dashboard`, framework Next.js, Node 22.x, source files outside the root directory included.
+- Deploys come from GitHub: the repo is connected, so every push to `main` builds production. CLI uploads from this machine timed out (network), so Git deploys are the supported path.
+- Demo, `/slownet-live.js` and the example app verified live. Live sessions answer `503 relay-not-configured` until Upstash Redis is connected (needs the account owner to accept Upstash's marketplace terms).
 
 ### 2026-10-22: Published to GitHub
 - Public repository: https://github.com/Vishalll069/slownet (default branch `main`).

@@ -110,6 +110,8 @@ The bundled demo shows how SlowNet works. **Live session** applies it to your re
 
 ### Deploying to Vercel
 
+Live instance: **https://slownet-seven.vercel.app** (deploys automatically on every push to `main`).
+
 1. Import the repository in Vercel and set **Root Directory** to `apps/dashboard` (the npm workspace install runs from the repo root automatically). `npm run build` bundles `slownet-live.js` first.
 2. Add **Upstash Redis** from the Vercel Marketplace (or set `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` yourself, see `.env.example`). Without it, live endpoints answer `503 relay-not-configured` rather than half-working, because serverless instances don't share memory. The demo works either way.
 3. Deploy, open the site, and start a live session.
