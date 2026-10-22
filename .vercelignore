@@ -1,0 +1,9 @@
+node_modules
+**/node_modules
+**/.next
+**/test-results
+**/playwright-report
+docs/*.docx
+apps/dashboard/public/slownet-live.js
+.env*
+!.env.example
