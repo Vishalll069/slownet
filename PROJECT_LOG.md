@@ -141,6 +141,10 @@ Typecheck, lint, unit and E2E tests pass; no secrets; README has setup, commands
 
 ## 3. Changelog
 
+### 2026-10-22: Published to GitHub
+- Public repository: https://github.com/Vishalll069/slownet (default branch `main`).
+- Spec `.docx` files are kept out of the repo (`.gitignore`); this log summarises them.
+
 ### 2026-10-22 — Live sessions (use SlowNet on your own app)
 - **Core:** `connectLive()` client (fetch shaping with the real engine, SSE or polling for state, redacted upsert batches, run resets, relay-traffic exclusion); `slownet-live.js` browser entry; live protocol types and zod schemas; 6 new client tests.
 - **Relay:** `/api/live/sessions`, `[s]/state` (GET/PUT), `[s]/clear`, `[s]/events`, `[s]/stream` (SSE, resumable); CORS; control-key checks; `MemoryStore` and `UpstashStore` with 4 unit tests (D-42 to D-47).
